@@ -46,3 +46,12 @@ def max_min_2(lst):
     return lst
 
 print(max_min_2([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
+
+def foo(value, lst):
+    value = 1
+    lst[0] = 44
+ 
+v = 3
+lst = [1, 2, 3]
+foo(v, lst)
+print(v, lst[0])
