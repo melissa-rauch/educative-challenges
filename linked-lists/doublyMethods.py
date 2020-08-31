@@ -1,39 +1,116 @@
-from doublyLinked import Node, LinkedList
+from doublyLinked import Node 
 
+class LinkedList:
+    def __init__(self):
+        self.head_node = None
+        self.tail_node
 
-def get_head(self):
-    return self.get_head
-    
-def is_empty(self):
+    def get_head(self):
+        return self.head_node
 
-    if (self.head) is None:
+    def is_empty(self):
+        if(self.head_node is None):  # Check whether the head is None
+            return True
+        else:
+            return False
+
+    def insert_at_head(self, dt):
+        temp_node = Node(dt)
+        temp_node.next_element = self.head_node
+        self.head_node = temp_node
+        return self.head_node
+
+    # Inserts a value at the end of the list
+    def insert_at_tail(self, value):
+        # Creating a new node
+        new_node = Node(value)
+
+        # Check if the list is empty, if it is simply point head to new node
+        if self.get_head() is None:
+            self.head_node = new_node
+            return
+
+        # if list not empty, traverse the list to the last node
+        temp = self.get_head()
+
+        while temp.next_element is not None:
+            temp = temp.next_element
+
+        # Set the nextElement of the previous node to new node
+        temp.next_element = new_node
+        return
+
+    def print_list(self):
+        if(self.is_empty()):
+            print("List is Empty")
+            return False
+        temp = self.head_node
+        while temp.next_element is not None:
+            print(temp.data, end=" -> ")
+            temp = temp.next_element
+        print(temp.data, "-> None")
         return True
-    else:
-        return False
 
-def insert_at_head(self,data):
+    def delete_at_head(self):
+        # Get Head and firstElement of List
+        first_element = self.get_head()
+        # If List is not empty then link head to the
+        # nextElement of firstElement.
+        if (first_element is not None):
+            self.head_node = first_element.next_element
+            first_element.next_element = None
+        return
 
-    temp_node = Node(data)
+    def delete(lst, value):
+        deleted = False
+        if lst.is_empty():
+            print("List is Empty")
+            return deleted
 
-    if (self.is_empty():
-        self.head = temp_node
-        return self.head
-    
-    temp_node.next = self.head
-    self.head.previous = temp_node
-    self.head = temp_node
+        current_node = lst.get_head()
 
-    return self.head
+        if current_node.data is value:
+            # Point head to the next element of the first element
+            lst.head_node = current_node.next_element
+            # Point the next element of the first element to Nobe
+            current_node.next_element.previous_element = None
+            deleted = True  # Both links have been changed.
+            print(str(current_node.data) + " Deleted!")
+            return deleted
 
-def print_list(self):
-    if (self.is_empty()):
-        print("List is empty, no data to print")
-        return False
-    
-    temp = self.head
+        # Traversing/Searching for node to Delete
+        while current_node:
+            if value is current_node.data:
+                if current_node.next_element:
+                    # Link the next node and the previous node to each other
+                    prev_node = current_node.previous_element
+                    next_node = current_node.next_element
+                    prev_node.next_element = next_node
+                    next_node.previous_element = prev_node
+                    # previous node pointer was maintained in Singly Linked List
 
-    while temp.next is not None:
-        print(temp.data, end=" -> ")
-        temp = temp.next
-    print(temp.data, " -> None ")
-    return True 
+                else:
+                    current_node.previous_element.next_element = None
+                deleted = True
+                break
+            # previousNode = tempNode was used in Singly Linked List
+            current_node = current_node.next_element
+
+        if deleted is False:
+            print(str(value) + " is not in the List!")
+        else:
+            print(str(value) + " Deleted!")
+        return deleted
+
+    def search(self, dt):
+        if self.is_empty():
+            print("List is Empty")
+            return None
+        temp = self.head_node
+        while(temp is not None):
+            if(temp.data is dt):
+                return temp
+            temp = temp.next_element
+
+        print(dt, " is not in List!")
+        return None
