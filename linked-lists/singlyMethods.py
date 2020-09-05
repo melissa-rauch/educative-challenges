@@ -99,7 +99,7 @@ class LinkedList:
         print(dt, " is not in List!")
         return None
     
-    def get_length(lst):
+    def get_length(self,lst):
 
         # start fro the first element
         curr = lst.get_head()
@@ -111,7 +111,7 @@ class LinkedList:
             curr = curr.next_element
         return length
 
-    def reverse(lst):
+    def reverse(self, lst):
         previous = None
         current = lst.get_head()
         next = None
@@ -125,3 +125,30 @@ class LinkedList:
             lst.head_node = previous
             
         return lst
+
+    def remove_duplicates(self,lst):
+        
+        current = lst.get_head()
+        hold = set()
+        previous = None
+
+        while current is not None:
+            
+            if current.data not in hold:
+                print("if", current.data)
+                hold.add(current.data)
+
+            else:
+                print("else", current.data)
+                if current.next_element:
+                    previous.next_element = current.next_element
+                else:
+                    previous.next_element = None
+                
+
+            previous = current  
+            current = current.next_element
+
+        return lst
+
+
